@@ -6,9 +6,20 @@ export declare class AuthController {
         name: string;
         email: string;
         password: string;
-    }): unknown;
+    }): Promise<{
+        message: string;
+    }>;
     login(body: {
         email: string;
         password: string;
-    }): unknown;
+    }): Promise<{
+        access_token: string;
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            darkMode: boolean;
+            createdAt: Date;
+        };
+    }>;
 }

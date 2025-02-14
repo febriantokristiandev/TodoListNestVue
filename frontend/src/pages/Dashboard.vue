@@ -68,18 +68,14 @@
                 </div>
             </div>
 
-
-
         </div>
     </div>
 
-    <!-- Create/Edit Todo Modal -->
-    <div v-if="showCreateTodoModal || showEditTodoModal"
-        class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+    <!-- Create Todo Modal -->
+    <div v-if="showCreateTodoModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-96">
-            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">{{ isEditMode ? 'Edit Todo' : 'Create New Todo'
-            }}</h3>
-            <form @submit.prevent="isEditMode ? updateTodo() : createTodo()">
+            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">Create New Todo</h3>
+            <form @submit.prevent="createTodo">
                 <div class="mt-4">
                     <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
                     <input v-model="todoForm.title" type="text" id="title"
@@ -106,13 +102,46 @@
 
                 <div class="mt-4 flex justify-end">
                     <button @click="closeModal" class="px-4 py-2 bg-gray-500 text-white rounded-lg mr-2">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">
-                        {{ isEditMode ? 'Update' : 'Create' }}
-                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Create</button>
                 </div>
             </form>
+        </div>
+    </div>
 
+    <!-- Edit Todo Modal -->
+    <div v-if="showEditTodoModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-96">
+            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">Edit Todo</h3>
+            <form @submit.prevent="updateTodo">
+                <div class="mt-4">
+                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+                    <input v-model="todoForm.title" type="text" id="title"
+                        class="mt-2 p-2 w-full border border-gray-300 rounded-md" required />
+                </div>
 
+                <div class="mt-4">
+                    <label for="description"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                    <textarea v-model="todoForm.description" id="description" rows="3"
+                        class="mt-2 p-2 w-full border border-gray-300 rounded-md" required></textarea>
+                </div>
+
+                <div class="mt-4">
+                    <label for="priority"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Priority</label>
+                    <select v-model="todoForm.priority" id="priority"
+                        class="mt-2 p-2 w-full border border-gray-300 rounded-md">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+
+                <div class="mt-4 flex justify-end">
+                    <button @click="closeModal" class="px-4 py-2 bg-gray-500 text-white rounded-lg mr-2">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
@@ -189,6 +218,16 @@ onMounted(async () => {
         }
     })
 })
+
+const openCreateTodoModal = () => {
+    showCreateTodoModal.value = true;
+    showEditTodoModal.value = false; // Pastikan modal Edit disembunyikan
+};
+
+const openEditTodoModal = () => {
+    showEditTodoModal.value = true;
+    showCreateTodoModal.value = false; // Pastikan modal Create disembunyikan
+};
 
 const fetchTodos = async () => {
     try {

@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref, watch, provide } from 'vue'
 import Navbar from './components/Navbar.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 import './style.css'
 const isDarkMode = ref(localStorage.getItem('darkMode') === 'true')
@@ -45,7 +48,7 @@ provide('toggleDarkMode', toggleDarkMode)
 
 <template>
   <div :class="{ 'dark': isDarkMode }">
-    <Navbar />
+    <Navbar v-if="route.meta.requiresNavbar !== false" />
     <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
       <router-view />
     </div>

@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
@@ -109,7 +108,8 @@ __decorate([
     __param(0, (0, websockets_1.MessageBody)()),
     __param(1, (0, websockets_1.ConnectedSocket)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [todo_dto_1.CreateTodoDto, typeof (_a = typeof socket_io_1.Socket !== "undefined" && socket_io_1.Socket) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [todo_dto_1.CreateTodoDto,
+        socket_io_1.Socket]),
     __metadata("design:returntype", Promise)
 ], TodoGateway.prototype, "handleCreateTodo", null);
 __decorate([
@@ -117,7 +117,8 @@ __decorate([
     __param(0, (0, websockets_1.MessageBody)()),
     __param(1, (0, websockets_1.ConnectedSocket)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [todo_dto_1.UpdateTodoDto, typeof (_b = typeof socket_io_1.Socket !== "undefined" && socket_io_1.Socket) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [todo_dto_1.UpdateTodoDto,
+        socket_io_1.Socket]),
     __metadata("design:returntype", Promise)
 ], TodoGateway.prototype, "handleUpdateTodo", null);
 __decorate([
@@ -125,7 +126,7 @@ __decorate([
     __param(0, (0, websockets_1.MessageBody)()),
     __param(1, (0, websockets_1.ConnectedSocket)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_c = typeof socket_io_1.Socket !== "undefined" && socket_io_1.Socket) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [Object, socket_io_1.Socket]),
     __metadata("design:returntype", Promise)
 ], TodoGateway.prototype, "handleDeleteTodo", null);
 __decorate([
@@ -133,7 +134,7 @@ __decorate([
     __param(0, (0, websockets_1.MessageBody)()),
     __param(1, (0, websockets_1.ConnectedSocket)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_d = typeof socket_io_1.Socket !== "undefined" && socket_io_1.Socket) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [Object, socket_io_1.Socket]),
     __metadata("design:returntype", Promise)
 ], TodoGateway.prototype, "handleMarkAsDone", null);
 exports.TodoGateway = TodoGateway = __decorate([
