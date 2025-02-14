@@ -57,12 +57,10 @@ export class TodoGateway {
     ) {
         const userId = updateTodoDto['userId'];
 
-        console.log(userId)
         if (!userId) {
             client.emit('error', 'User not authenticated');
             return;
         }
-        console.log(userId)
         const userIdNumber = parseInt(userId, 10);
         if (isNaN(userIdNumber)) {
             client.emit('error', 'Invalid user ID');
@@ -117,7 +115,6 @@ export class TodoGateway {
             return;
         }
 
-        console.log("Deleted todo:", deletedTodo); // Check the deleted todo details
 
         // Send data back to client and broadcast
         client.emit('todoDeleted', { id, userId });

@@ -42,12 +42,10 @@ let TodoGateway = class TodoGateway {
     }
     async handleUpdateTodo(updateTodoDto, client) {
         const userId = updateTodoDto['userId'];
-        console.log(userId);
         if (!userId) {
             client.emit('error', 'User not authenticated');
             return;
         }
-        console.log(userId);
         const userIdNumber = parseInt(userId, 10);
         if (isNaN(userIdNumber)) {
             client.emit('error', 'Invalid user ID');
@@ -82,7 +80,6 @@ let TodoGateway = class TodoGateway {
             client.emit('error', 'Todo not found or cannot be deleted');
             return;
         }
-        console.log("Deleted todo:", deletedTodo);
         client.emit('todoDeleted', { id, userId });
         client.broadcast.emit('todoDeleted', { id, userId });
     }
